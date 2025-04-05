@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Любовный сайт</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #ffe6f0, #ffcce0);
+      color: #d6336c;
+      text-align: center;
+      padding: 30px;
+    }
+    h1, h2 {
+      font-family: 'Comic Sans MS', cursive;
+    }
+    .block {
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 20px;
+      background: #fff0f5;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+      max-width: 500px;
+    }
+    button {
+      font-size: 18px;
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .hearts {
+      font-size: 24px;
+      margin-top: 15px;
+      animation: float 2s infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    .clicker-heart {
+      font-size: 50px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .love-message {
+      font-size: 20px;
+      color: #ff1493;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- БЛОК 1 -->
+  <div class="block">
+    <h1>Китик, ты меня любишь?</h1>
+    <button onclick="showLove()">ДА</button>
+    <button id="noBtn" onmouseover="moveButton()">НЕТ</button>
+    <div id="loveResult" class="hearts"></div>
+  </div>
+
+  <!-- БЛОК 2 -->
+  <div class="block">
+    <h2>Введи имя любимого мальчика:</h2>
+    <input type="text" id="nameInput" placeholder="Имя...">
+    <button onclick="checkName()">Проверить</button>
+    <div id="nameResult" class="love-message"></div>
+  </div>
+
+  <!-- БЛОК 3 -->
+  <div class="block">
+    <h2>Нажимай на сердечко!</h2>
+    <div id="heart" class="clicker-heart" onclick="clickHeart()">❤️</div>
+    <div id="clickMessage" class="love-message"></div>
+  </div>
+
+  <script>
+    // Блок 1 - кнопка "НЕТ" убегает
+    function moveButton() {
+      const button = document.getElementById('noBtn');
+      button.style.position = 'absolute';
+      button.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+      button.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+    }
+
+    // Блок 1 - показать любовь
+    function showLove() {
+      document.getElementById('loveResult').innerHTML = '❤️ Я тебя тоже люблю! ❤️<br>💌💕💖💘';
+    }
+
+    // Блок 2 - проверка имени
+    function checkName() {
+      const name = document.getElementById('nameInput').value.trim().toLowerCase();
+      const loveNames = ['китик', 'солнышко', 'кит', 'кипитярик'];
+      if (loveNames.includes(name)) {
+        document.getElementById('nameResult').innerText = '💖 Совместимость 100%! 💖';
+      } else {
+        document.getElementById('nameResult').innerText = '🤔 Подумай хорошенько...';
+      }
+    }
+
+    // Блок 3 - кликер
+    let clicks = 0;
+    function clickHeart() {
+      clicks++;
+      const heart = document.getElementById('heart');
+      heart.style.transform = `scale(${1 + clicks * 0.1})`;
+      if (clicks > 10) {
+        document.getElementById('clickMessage').innerText = 'Вы затискали Кита! 🥰';
+      }
+    }
+  </script>
+</body>
+</html>
